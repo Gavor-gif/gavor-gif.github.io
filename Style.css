@@ -10,7 +10,10 @@ body {
     font-size: 80px;
     padding-top: 140px;
     color: tomato;
-    font-family: 'Rubik Wet Paint', serif; /* Make sure the font name is in single quotes */
+    font-family: "Rubik Wet Paint", serif;
+    font-family: "Rubik Wet Paint", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
