@@ -4,7 +4,6 @@ body {
     margin: 0;
 }
 
-
 #name {
     text-align: center;
     font-size: 80px;
@@ -12,12 +11,11 @@ body {
     color: tomato;
 }
 
-
 .socials {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
+    height: 100vh;
     margin-top: -300px; /* Moves it up by 300 pixels */
 }
 
@@ -31,7 +29,7 @@ body {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.aboutme a:hover {
+.socials a:hover {  /* Fixed from .aboutme to .socials */
     background-color: grey;
     color: palevioletred;
     border-color: palevioletred;
