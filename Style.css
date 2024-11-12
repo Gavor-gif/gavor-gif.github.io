@@ -13,7 +13,7 @@ body {
 }
 
 
-.aboutme {
+.socials {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,9 +21,9 @@ body {
     margin-top: -300px; /* Moves it up by 300 pixels */
 }
 
-.aboutme a {
+.socials a {
     color: white;
-    background-color: orangered;
+    background-color: black;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -32,7 +32,7 @@ body {
 }
 
 .aboutme a:hover {
-    background-color: white;
+    background-color: grey;
     color: palevioletred;
     border-color: palevioletred;
 }
