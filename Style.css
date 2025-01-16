@@ -34,3 +34,26 @@ body {
     color: palevioletred;
     border-color: palevioletred;
 }
+.aboutme {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: -300px; /* Moves it up by 300 pixels */
+}
+
+.aboutme a {
+    color: white;
+    background-color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.aboutme a:hover {  /* Fixed from .aboutme to .socials */
+    background-color: pink;
+    color: tomato;
+    border-color: red;
+}
