@@ -1,9 +1,11 @@
+
 body {
     background: linear-gradient(darkred, black);
     height: 100vh;
     margin: 0;
+    font-family: 'Rubik Wet Paint', sans-serif;
 }
-
+ 
 #name {
     text-align: center;
     font-size: 80px;
@@ -11,46 +13,34 @@ body {
     color: tomato;
 }
 
-.socials {
+
+.socials, .aboutme {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin-top: -300px; 
 }
 
-.socials a {
-    color: white;
-    background-color: black;
+
+.socials a, .aboutme a {
+    display: inline-block;
     padding: 10px 20px;
+    background-color: black;
+    color: white;
     text-decoration: none;
     border-radius: 5px;
     border: 2px solid transparent;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    font-size: 20px;
 }
 
-.socials a:hover { 
+
+.socials a:hover, .aboutme a:hover {
     background-color: grey;
     color: palevioletred;
     border-color: palevioletred;
 }
-.aboutme {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin-top: -300px; 
-}
 
-.aboutme a {
-    color: white;
-    background-color: black;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    border: 2px solid transparent;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
 
 .aboutme a:hover { 
     background-color: pink;
