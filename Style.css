@@ -1,46 +1,52 @@
 body {
-    background: linear-gradient(darkred, black);
+    background: linear-gradient(to bottom right, #8b0000, #000000); /* Gradient still here */
     height: 100vh;
     margin: 0;
-    font-family: 'Rubik Wet Paint', sans-serif; /* Ensure all body text uses this font */
+    font-family: 'Arial', sans-serif; /* Clean font */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #name {
     text-align: center;
     font-size: 80px;
-    padding-top: 140px;
-    color: tomato;
-    font-family: 'Rubik Wet Paint', sans-serif; /* Ensure #name specifically uses the font */
+    color: #e74c3c; /* Tomato-colored name */
+    margin-top: 20px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Depth with shadow */
 }
 
 .socials, .aboutme {
+    margin-top: 20px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    gap: 20px; /* Spacing between buttons */
 }
 
 .socials a, .aboutme a {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: black;
+    padding: 15px 30px;
+    background-color: #e74c3c; /* Tomato color for the buttons */
     color: white;
     text-decoration: none;
-    border-radius: 5px;
-    border: 2px solid transparent;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border-radius: 50px; /* Rounded edges */
     font-size: 20px;
-    font-family: 'Rubik Wet Paint', sans-serif; /* Ensure links use the same font */
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Clean shadow */
 }
 
 .socials a:hover, .aboutme a:hover {
-    background-color: grey;
-    color: palevioletred;
-    border-color: palevioletred;
+    background-color: #c0392b; /* Darker tomato color on hover */
+    color: #ecf0f1;
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow */
 }
 
 .aboutme a:hover {
-    background-color: pink;
-    color: tomato;
-    border-color: red;
+    background-color: #c0392b; /* Same hover color for both */
+    color: #fff;
+    border: 2px solid #c0392b; /* Matching border on hover */
 }
