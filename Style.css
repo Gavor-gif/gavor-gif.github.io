@@ -1,18 +1,17 @@
-
 body {
-    background: linear-gradient(darkred, black);  
+    background: linear-gradient(darkred, black);
     height: 100vh;
     margin: 0;
-    font-family: 'Rubik Wet Paint', sans-serif;
+    font-family: 'Rubik Wet Paint', sans-serif; /* Ensure all body text uses this font */
 }
- 
+
 #name {
     text-align: center;
     font-size: 80px;
     padding-top: 140px;
     color: tomato;
+    font-family: 'Rubik Wet Paint', sans-serif; /* Ensure #name specifically uses the font */
 }
-
 
 .socials, .aboutme {
     display: flex;
@@ -20,7 +19,6 @@ body {
     align-items: center;
     height: 100vh;
 }
-
 
 .socials a, .aboutme a {
     display: inline-block;
@@ -32,8 +30,8 @@ body {
     border: 2px solid transparent;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     font-size: 20px;
+    font-family: 'Rubik Wet Paint', sans-serif; /* Ensure links use the same font */
 }
-
 
 .socials a:hover, .aboutme a:hover {
     background-color: grey;
@@ -41,8 +39,7 @@ body {
     border-color: palevioletred;
 }
 
-
-.aboutme a:hover { 
+.aboutme a:hover {
     background-color: pink;
     color: tomato;
     border-color: red;
