@@ -62,7 +62,7 @@
                     callback(received.d);
                 }
             };
-            ws.onclose = () => initializeLanyard(callback);
+            ws.onclose = () => setTimeout(() => initializeLanyard(callback), 5000);
         }
 
         function updatePresence(data) {
@@ -78,9 +78,9 @@
             let statusClass = `status-${discord_status}`;
 
             if (listening_to_spotify && spotify) {
+                statusText += `<br>→ Listening to ${spotify.song} on Spotify ←`;
             }
 
-                statusText += `<br>→ Listening to ${spotify.song} on Spotify ←`;
             presenceElement.innerHTML = statusText;
             presenceElement.className = `presence ${statusClass}`;
         }
