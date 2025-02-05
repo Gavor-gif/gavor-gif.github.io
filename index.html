@@ -74,13 +74,13 @@
             const { discord_user, discord_status, listening_to_spotify, spotify } = data;
             const presenceElement = document.getElementById('presence');
 
-            let statusText = `~ ${discord_user.username} | ${discord_status} ~`;
+            let statusText = `→ ${discord_user.username} | ${discord_status} ←`;
             let statusClass = `status-${discord_status}`;
 
             if (listening_to_spotify && spotify) {
-                statusText += `<br>~ Listening to ${spotify.song} on Spotify ~`;
             }
 
+                statusText += `<br>→ Listening to ${spotify.song} on Spotify ←`;
             presenceElement.innerHTML = statusText;
             presenceElement.className = `presence ${statusClass}`;
         }
