@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Discord Profile</title>
+    <title>Stuff i make are here</title>
     <link rel="stylesheet" href="Style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
@@ -29,15 +29,33 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        #avatar {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            margin: 20px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        .socials, .aboutme {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
         }
 
-        .presence, .platforms, .custom-status, .activity-section {
+        .socials a, .aboutme a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .socials a:hover, .aboutme a:hover {
+            background-color: #c0392b;
+            color: #ecf0f1;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .presence, .custom-status, .activity-section {
             font-size: 20px;
             font-weight: bold;
             margin-top: 20px;
@@ -56,11 +74,14 @@
 </head>
 <body>
     <h1 id="name" class="rubik-wet-paint-regular">Gavo1002#0</h1>
-    <img id="avatar" src="https://cdn.discordapp.com/avatars/1202303158915960845/54c1d4d15cf122ce4d665e27675a6277.png" alt="GavoTheVIII Avatar">
+
+    <div class="socials">
+        <a href="https://gavor-gif.github.io/Socials/" target="_blank">Socials</a>
+        <a href="https://gavor-gif.github.io/about-me/" target="_blank">About me</a>
+    </div>
 
     <div id="custom-status" class="custom-status">Loading Custom Status...</div>
     <div id="presence" class="presence">Loading Discord Status...</div>
-    <div id="platforms" class="platforms">Loading Active Platforms...</div>
     <div id="activity-section" class="activity-section">Loading Activity...</div>
 
     <script>
@@ -86,11 +107,10 @@
         function updatePresence(data) {
             const presenceElement = document.getElementById('presence');
             const customStatusElement = document.getElementById('custom-status');
-            const platformsElement = document.getElementById('platforms');
             const activitySection = document.getElementById('activity-section');
 
             // Discord Status
-            const { discord_status, activities, active_on_discord_web, active_on_discord_desktop, active_on_discord_mobile } = data;
+            const { discord_status, activities } = data;
             let statusClass = `status-${discord_status}`;
             presenceElement.textContent = `Status: ${discord_status.charAt(0).toUpperCase() + discord_status.slice(1)}`;
             presenceElement.className = `presence ${statusClass}`;
@@ -102,10 +122,6 @@
             } else {
                 customStatusElement.textContent = "Custom Status: None";
             }
-
-            // Active Platforms
-            let platformText = `Web: ${active_on_discord_web ? "Active" : "Inactive"}, Desktop: ${active_on_discord_desktop ? "Active" : "Inactive"}, Mobile: ${active_on_discord_mobile ? "Active" : "Inactive"}`;
-            platformsElement.textContent = `Active Platforms: ${platformText}`;
 
             // Activity Section
             const spotifyActivity = activities.find(activity => activity.name === "Spotify");
