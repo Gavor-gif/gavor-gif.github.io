@@ -72,16 +72,6 @@
         .status-dnd { color: #ff453a; }
         .status-offline { color: #8e8e93; }
 
-        .subscriber-count {
-            font-size: 24px;
-            font-weight: bold;
-            color: #FF0000;
-            border: 2px solid #FF0000;
-            padding: 10px;
-            display: inline-block;
-            margin-top: 20px;
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body>
@@ -94,29 +84,11 @@
 
     <div id="custom-status" class="custom-status">Loading Custom Status...</div>
     <div id="presence" class="presence">Loading Discord Status...</div>
-    <div id="activity-section" class="activity-section">Loading Activity...</div>
     
-    <!-- YouTube Subscriber Count -->
-    <div id="subscriberCount" class="subscriber-count">Loading Subscriber Count...</div>
+    <!-- YouTube Subscriber Count / error didnt work-->
+
 
     <script>
-        const apiKey = 'YOUR_API_KEY'; // Replace with your YouTube API key
-        const channelId = 'YOUR_CHANNEL_ID'; // Replace with your YouTube Channel ID
-
-        function fetchSubscriberCount() {
-            fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`)
-                .then(response => response.json())
-                .then(data => {
-                    const subscriberCount = data.items[0].statistics.subscriberCount;
-                    document.getElementById('subscriberCount').innerText = `Subscribers: ${subscriberCount}`;
-                })
-                .catch(error => {
-                    console.error('Error fetching subscriber count:', error);
-                    document.getElementById('subscriberCount').innerText = 'Failed to load subscriber count';
-                });
-        }
-
-        fetchSubscriberCount();
 
         const LANYARD_WS = 'wss://api.lanyard.rest/socket';
         const LANYARD_OP = { HELLO: 1, INITIALIZE: 2, HEARTBEAT: 3, PRESENCE: 0 };
