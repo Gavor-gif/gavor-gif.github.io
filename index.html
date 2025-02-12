@@ -3,15 +3,44 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Projects</title>
+    <title>My Discord Profile</title>
     <link rel="stylesheet" href="Style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
 
-        .presence {
-            margin-top: 40px;
+        body {
+            background: linear-gradient(to bottom right, #8b0000, #000000);
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #name {
+            text-align: center;
+            font-size: 80px;
+            color: #e74c3c;
+            margin-top: 20px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #avatar {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .presence, .platforms, .custom-status, .activity-section {
             font-size: 20px;
             font-weight: bold;
+            margin-top: 20px;
             padding: 15px;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.1);
@@ -19,29 +48,20 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
-        .status-online { color: #30d158; } /* Green */
-        .status-idle { color: #ffd60a; } /* Yellow */
-        .status-dnd { color: #ff453a; } /* Red */
-        .status-offline { color: #8e8e93; } /* Grey */
-    </style>   
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BFHCSL08SE"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-BFHCSL08SE');
-    </script>
+        .status-online { color: #30d158; }
+        .status-idle { color: #ffd60a; }
+        .status-dnd { color: #ff453a; }
+        .status-offline { color: #8e8e93; }
+    </style>
 </head>
 <body>
-    <h1 id="name" class="rubik-wet-paint-regular"> Gavo1002 </h1>
+    <h1 id="name" class="rubik-wet-paint-regular">Gavo1002#0</h1>
+    <img id="avatar" src="https://cdn.discordapp.com/avatars/1202303158915960845/54c1d4d15cf122ce4d665e27675a6277.png" alt="GavoTheVIII Avatar">
 
-    <div class="socials"><a href="https://gavor-gif.github.io/Socials/" target="_blank">Socials</a></div>
-    <div class="aboutme"><a href="https://gavor-gif.github.io/about-me/" target="_blank">About me</a></div> 
-
-    <!-- Discord Presence -->
-    <div id="presence" class="presence">Loading...</div>
+    <div id="custom-status" class="custom-status">Loading Custom Status...</div>
+    <div id="presence" class="presence">Loading Discord Status...</div>
+    <div id="platforms" class="platforms">Loading Active Platforms...</div>
+    <div id="activity-section" class="activity-section">Loading Activity...</div>
 
     <script>
         const LANYARD_WS = 'wss://api.lanyard.rest/socket';
@@ -52,13 +72,11 @@
             let ws = new WebSocket(LANYARD_WS);
             ws.onmessage = ({ data }) => {
                 const received = JSON.parse(data);
-                console.log("Raw Lanyard Data:", received); 
 
                 if (received.op === LANYARD_OP.HELLO) {
                     ws.send(JSON.stringify({ op: LANYARD_OP.INITIALIZE, d: { subscribe_to_id: DISCORD_ID } }));
                     setInterval(() => ws.send(JSON.stringify({ op: LANYARD_OP.HEARTBEAT })), 30000);
                 } else if (received.op === LANYARD_OP.PRESENCE) {
-                    console.log("Lanyard Presence Data:", received.d);
                     callback(received.d);
                 }
             };
@@ -66,23 +84,36 @@
         }
 
         function updatePresence(data) {
-            if (!data || !data.discord_user) {
-                console.error("Missing discord_user data:", data);
-                return;
-            }
-
-            const { discord_user, discord_status, listening_to_spotify, spotify } = data;
             const presenceElement = document.getElementById('presence');
+            const customStatusElement = document.getElementById('custom-status');
+            const platformsElement = document.getElementById('platforms');
+            const activitySection = document.getElementById('activity-section');
 
-            let statusText = ` ${discord_user.username} → ${discord_status} `;
+            // Discord Status
+            const { discord_status, activities, active_on_discord_web, active_on_discord_desktop, active_on_discord_mobile } = data;
             let statusClass = `status-${discord_status}`;
+            presenceElement.textContent = `Status: ${discord_status.charAt(0).toUpperCase() + discord_status.slice(1)}`;
+            presenceElement.className = `presence ${statusClass}`;
 
-            if (listening_to_spotify && spotify) {
-                statusText += `<br>→ Listening to ${spotify.song} on Spotify ←`;
+            // Custom Status
+            const customActivity = activities.find(activity => activity.name === "Custom Status");
+            if (customActivity) {
+                customStatusElement.textContent = `Custom Status: "${customActivity.state}"`;
+            } else {
+                customStatusElement.textContent = "Custom Status: None";
             }
 
-            presenceElement.innerHTML = statusText;
-            presenceElement.className = `presence ${statusClass}`;
+            // Active Platforms
+            let platformText = `Web: ${active_on_discord_web ? "Active" : "Inactive"}, Desktop: ${active_on_discord_desktop ? "Active" : "Inactive"}, Mobile: ${active_on_discord_mobile ? "Active" : "Inactive"}`;
+            platformsElement.textContent = `Active Platforms: ${platformText}`;
+
+            // Activity Section
+            const spotifyActivity = activities.find(activity => activity.name === "Spotify");
+            if (spotifyActivity) {
+                activitySection.innerHTML = `Listening to: ${spotifyActivity.details} by ${spotifyActivity.state}`;
+            } else {
+                activitySection.textContent = "Not listening to anything rn.";
+            }
         }
 
         initializeLanyard(updatePresence);
