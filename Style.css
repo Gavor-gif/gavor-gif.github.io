@@ -10,7 +10,7 @@ body {
     flex-direction: column;
 }
 
-#name, #discFail {
+#name {
     text-align: center;
     font-size: 80px;
     color: #e74c3c; /* Tomato-colored name */
@@ -50,3 +50,12 @@ body {
     color: #fff;
     border: 2px solid #c0392b; /* Matching border on hover */
 }
+#discFail {
+    text-align: center;
+    font-size: 15px;
+    color: #e74c3c; /* Tomato-colored name */
+    margin-top: 20px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Depth with shadow */
+}
+
