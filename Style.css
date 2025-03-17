@@ -10,7 +10,7 @@ body {
     flex-direction: column;
 }
 
-#name {
+#name, #discFail {
     text-align: center;
     font-size: 80px;
     color: #e74c3c; /* Tomato-colored name */
