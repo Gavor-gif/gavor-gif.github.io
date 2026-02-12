@@ -78,62 +78,12 @@
     <h1 id="name" class="rubik-wet-paint-regular">Gavo1002</h1>
 
     <div class="socials">
-        <a href="https://gavor-gif.github.io/Socials/" target="_blank">Socials</a>
-        <a href="https://gavor-gif.github.io/about-me/" target="_blank">About me</a>
+    <p>I'm recoding this website.</p>
     </div>
 
-    <script>
 
-        const LANYARD_WS = 'wss://api.lanyard.rest/socket';
-        const LANYARD_OP = { HELLO: 1, INITIALIZE: 2, HEARTBEAT: 3, PRESENCE: 0 };
-        const DISCORD_ID = '1202303158915960845';
-
-        function initializeLanyard(callback) {
-            let ws = new WebSocket(LANYARD_WS);
-            ws.onmessage = ({ data }) => {
-                const received = JSON.parse(data);
-
-                if (received.op === LANYARD_OP.HELLO) {
-                    ws.send(JSON.stringify({ op: LANYARD_OP.INITIALIZE, d: { subscribe_to_id: DISCORD_ID } }));
-                    setInterval(() => ws.send(JSON.stringify({ op: LANYARD_OP.HEARTBEAT })), 30000);
-                } else if (received.op === LANYARD_OP.PRESENCE) {
-                    callback(received.d);
-                }
-            };
-            ws.onclose = () => setTimeout(() => initializeLanyard(callback), 5000);
-        }
-
-        function updatePresence(data) {
-            const presenceElement = document.getElementById('presence');
-            const customStatusElement = document.getElementById('custom-status');
-            const activitySection = document.getElementById('activity-section');
-
-            // Discord Status
-            const { discord_status, activities } = data;
-            let statusClass = `status-${discord_status}`;
-            presenceElement.textContent = `Status: ${discord_status.charAt(0).toUpperCase() + discord_status.slice(1)}`;
-            presenceElement.className = `presence ${statusClass}`;
-
-            // Custom Status
-            const customActivity = activities.find(activity => activity.name === "Custom Status");
-            if (customActivity) {
-                customStatusElement.textContent = `Custom Status: "${customActivity.state}"`;
-            } else {
-                customStatusElement.textContent = "Custom Status: None";
-            }
-
-            // Activity Section
-            const spotifyActivity = activities.find(activity => activity.name === "Spotify");
-            if (spotifyActivity) {
-                activitySection.innerHTML = `Listening to: ${spotifyActivity.details} by ${spotifyActivity.state}`;
-            } else {
-                activitySection.textContent = "Not listening to anything rn :/";
-            }
-        }
-
-        initializeLanyard(updatePresence);
-    </script>
 </body>
 </html>
+
 
 
